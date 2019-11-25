@@ -59,9 +59,9 @@ def tambahData():
 		datainput = request.form  # Mengambil data dan membuat kedalam dictionary
 		budayaData.tambah(datainput['Nama'], datainput['Tipe'], datainput['Provinsi'], datainput['Referensi'])
 		print(budayaData)
-		return render_template("tambahBudaya.html", result=datainput['nama'])
+		return render_template("tambahBudaya.html", result=datainput['Nama'], data=datainput)
 
 
 # run main app
 if __name__ == "__main__":
-	app.run(debug=True)
+	app.run()

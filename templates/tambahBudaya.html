@@ -31,16 +31,18 @@
 	</form>
 
 
-	{% if result is defined and result>0 %}
+	{% if result is defined%}
 	    <h3>{% print result %} berhasil ditambahkan</h3>
-	{% endif %}
-    {% if data is defined and data>0 %}
+
+        <br>
+        <table>
         {% for key,value in data.items() %}
-        <tr>
-            <th> {{ key }}</th>
-            <td> {{ value }}</td>
-        </tr>
+            <tr>
+                <th> {{ key }}</th>
+                <td> {{ value }}</td>
+            </tr>
         {% endfor %}
+        </table>
     {% endif %}
 </body>
 </html>
