@@ -73,16 +73,17 @@ def ubahData():
 		return render_template("ubahbudaya.html", result=success, data=datainput)
 
 
-@app.route('\hapusBudaya', methods=['GET', 'POST'])
+@app.route('/hapusBudaya', methods=['GET', 'POST'])
 def hapusData():
 	if request.method == 'GET':
 		return render_template("hapusbudaya.html")
 
-	elif request == 'POST':
+	elif request.method == 'POST':
 		datainput = request.form
 		deletion = budayaData.hapus(datainput['Nama'])
 		print(budayaData)
-		return render_template("hausbudaya.html", result=deletion)
+		return render_template("hapusbudaya.html", result=deletion, budaya=datainput['Nama'])
+
 
 # run main app
 if __name__ == "__main__":
