@@ -61,6 +61,28 @@ def tambahData():
 		print(budayaData)
 		return render_template("tambahBudaya.html", result=datainput['Nama'], data=datainput)
 
+@app.route('/ubahBudaya', methods=['GET', 'POST'])
+def ubahData():
+	if request.method == 'GET':
+		return render_template("ubahbudaya.html")
+
+	elif request.method == 'POST':
+		datainput = request.form
+		success = budayaData.ubah(datainput['Nama'], datainput['Tipe'], datainput['Provinsi'], datainput['Referensi'])
+		print(budayaData)
+		return render_template("ubahbudaya.html", result=success, data=datainput)
+
+
+@app.route('\hapusBudaya', methods=['GET', 'POST'])
+def hapusData():
+	if request.method == 'GET':
+		return render_template("hapusbudaya.html")
+
+	elif request == 'POST':
+		datainput = request.form
+		deletion = budayaData.hapus(datainput['Nama'])
+		print(budayaData)
+		return render_template("hausbudaya.html", result=deletion)
 
 # run main app
 if __name__ == "__main__":
