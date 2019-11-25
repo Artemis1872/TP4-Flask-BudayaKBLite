@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title>BudayaKB Lite</title>
+</head>
+
+<body>
+	 {% include 'includes/_navbar.html' %}
+	<h2>Tambah Budaya</h2>
+
+	<form method="POST" action="" enctype = "multipart/form-data">
+		<p>Tambah Budaya ke BudayaKB</p>
+        <p>
+            <label>Nama Budaya:</label>
+            <input type="text" name="Nama"/>
+        </p>
+        <p>
+            <label>Tipe Budaya:</label>
+            <input type="text" name="Tipe"/>
+        </p>
+        <p>
+            <label>Provinsi Asal Budaya:</label>
+            <input type="text" name="Provinsi"/>
+        </p>
+        <p>
+            <label>Referensi:</label>
+            <input type="text" name="Referensi"/>
+        </p>
+        <p>
+            <input type="submit" value="Masukkan Budaya">
+        </p>
+	</form>
+
+
+	{% if result is defined and result>0 %}
+	    <h3>{% print result %} berhasil ditambahkan</h3>
+	{% endif %}
+    {% if data is defined and data>0 %}
+        {% for key,value in data.items() %}
+        <tr>
+            <th> {{ key }}</th>
+            <td> {{ value }}</td>
+        </tr>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
+
+
+
+
+
