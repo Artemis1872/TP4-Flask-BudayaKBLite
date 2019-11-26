@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    .row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+</style>
+
+<head>
+	<title>BudayaKB Lite</title>
+</head>
+
+<body>
+	 {% include 'includes/_navbar.html' %}
+	<h2>Cari Budaya</h2>
+    <div class="row">
+        <div class="column">
+            <form method="POST" action="" enctype = "multipart/form-data">
+                <p>Cari berdasarkan nama</p>
+                <p>
+                    <label>Nama Budaya:</label>
+                    <input type="text" name="Nama"/>
+                </p>
+                    <input type="submit" value="Cari nama">
+        </div>
+        <div class="column">
+                <p>Cari berdasarkan tipe</p>
+                <p>
+                    <label>Tipe Budaya:</label>
+                    <input type="text" name="Tipe"/>
+                </p>
+                    <input type="submit" value="Cari tipe">
+        </div>
+        <div class="column">
+                <p>Cari berdasarkan provinsi</p>
+                <p>
+                    <label>Provinsi Budaya:</label>
+                    <input type="text" name="Provinsi"/>
+                </p>
+                    <input type="submit" value="Cari provinsi">
+            </form>
+        </div>
+    </div>
+
+
+	{% if result is defined and len != 0 %}
+        {% for i in result %}
+	    <h3>{{i}}</h3>
+        {% endfor %}
+
+    {% elif result is defined and result == 0 %}
+        <h3>tidak dapat ditemukan!</h3>
+    {% endif %}
+</body>
+</html>

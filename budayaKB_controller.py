@@ -84,6 +84,35 @@ def hapusData():
 		print(budayaData)
 		return render_template("hapusbudaya.html", result=deletion, budaya=datainput['Nama'])
 
+@app.route('/cariBudaya', methods=['GET', 'POST'])
+def cariData():
+	if request.method == 'GET':
+		return render_template("caribudaya.html")
+
+	elif request.method == 'POST':
+		datainput = request.form
+		data = None
+		print(datainput['Nama'])
+		print(datainput['Tipe'])
+		print(datainput['Provinsi'])
+		if datainput['Nama'] != '':
+			data = budayaData.cariByNama(datainput['Nama'])
+		elif datainput['Tipe'] != '':
+			data = budayaData.cariByTipe(datainput['Tipe'])
+		elif datainput['Provinsi'] != '':
+			data = budayaData.cariByProv(datainput['Provinsi'])
+		else:
+			return render_template("caribudaya.html")
+		return render_template("caribudaya.html", result=data)
+
+@app.route('/statsBudaya', methods=['GET', 'POST'])
+def statData():
+	if request.method == 'GET':
+		return render_template("statistik.html")
+
+	elif request.method == 'POST':
+		return render_template("statistik.html")
+
 
 # run main app
 if __name__ == "__main__":
