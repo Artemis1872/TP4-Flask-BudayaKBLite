@@ -33,10 +33,10 @@ def index():
 # - merender tampilan saat menu Impor Budaya diklik	
 # - melakukan pemrosesan terhadap isian form setelah tombol "Import Data" diklik
 # - menampilkan notifikasi bahwa data telah berhasil diimport 	
-@app.route('/imporBudaya', methods=['GET', 'POST'])
+@app.route('/impor', methods=['GET', 'POST'])
 def importData():
 	if request.method == "GET":
-		return render_template("imporBudaya.html")
+		return render_template("impor.html")
 
 	elif request.method == "POST":
 		f = request.files['file']
@@ -47,7 +47,7 @@ def importData():
 		result_impor = budayaData.importFromCSV(f.filename)
 		
 		# budayaData.exportToCSV(databasefilename)  # setiap perubahan data langsung disimpan ke file
-		return render_template("imporBudaya.html", result=result_impor, fname=f.filename)
+		return render_template("impor.html", result=result_impor, fname=f.filename)
 
 
 @app.route('/tambahBudaya', methods=['GET', 'POST'])
@@ -108,7 +108,8 @@ def cariData():
 @app.route('/statsBudaya', methods=['GET', 'POST'])
 def statData():
 	if request.method == 'GET':
-		return render_template("statistik.html")
+		banyak = budayaData.stat()
+		return render_template("statistik.html", count=banyak)
 
 	elif request.method == 'POST':
 		return render_template("statistik.html")
@@ -116,4 +117,4 @@ def statData():
 
 # run main app
 if __name__ == "__main__":
-	app.run()
+	app.run(debug=True)

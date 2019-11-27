@@ -1,20 +1,176 @@
-<html>
+<!DOCTYPE HTML>
+<html lang="id">
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:700|Roboto+Mono&display=swap');
+
+    @-webkit-keyframes dynamic-background {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @-moz-keyframes dynamic-background {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @keyframes dynamic-background {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    body {
+        background: linear-gradient(72deg, #3cbae4, #943ce4, #3c5ae4);
+        background-size: 500% 500%;
+        -webkit-animation: dynamic-background 20s ease infinite;
+        -moz-animation: dynamic-background 20s ease infinite;
+        animation: dynamic-background 20s ease infinite;
+    }
+
+    h1 {
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 4em !important;
+    }
+
+    sub {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 40% !important;
+    }
+
+    .kb-heading {
+        padding: 10px 10px;
+        text-align: center;
+        color: #ffffff;
+        text-shadow: 1px 3px 5px gray;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    table {
+        margin-top: 1em;
+    }
+
+    .colrow {
+        display: flex;
+    }
+
+    .column {
+        flex: 50%;
+    }
+
+</style>
+
 <head>
-	<title>BudayaKB Lite</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>BudayaKB Lite</title>
 </head>
-
 <body>
-	 {% include 'includes/_navbar.html' %}
-	<h1>Selamat Datang di BudayaKB</h1>
-	
-	<p>Indonesia adalah negara yang kaya akan warisan budaya. Batik, misalnya, merupakan salah satu simbol warisan budaya Indonesia yang telah diakui oleh UNESCO sebagai intangible cultural heritage of humanity. Warisan budaya lainnya yang tidak kalah populer adalah Rendang, yang merupakan ikon kuliner Indonesia dan terpilih sebagai masakan terenak di dunia menurut CNN. Tentunya, masih banyak lagi warisan-warisan budaya Indonesia yang tak kalah menarik, mulai dari Tari Saman, sampai Upacara Kuk Kir Kna.</p>
+<div class="container">
 
-<p>Sistem BudayaKB merupakan sistem manajemen knowledge base (KB) untuk warisan budaya Indonesia. Sistem ini dikembangkan untuk melestarikan budaya Indonesia dan memiliki beberapa fitur penting, diantaranya: </p>
-<ol>
-	<li>Mengimpor dan mengekspor data budaya</li><br/>
-	<li>Mencari data budaya</li><br/>
-	<li>Menambahkan, menyunting, dan menghapus data budaya</li><br/>
-	<li>Menampilkan statistik data budaya</li><br/>
-</ol>
+    <!--Header-->
+    <div class="kb-heading">
+        <h1>BUDAYA-KB<sub>lite</sub></h1>
+        <p class="subtitle">Kalau bukan kita yang melestarikan budaya, siapa lagi?</p>
+    </div>
+    <!--Header-->
+
+    <!--Card Form-->
+    <div class="card">
+
+        <!--Navbar-->
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/impor">Impor/Ekspor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cari</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ubah data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Hapus data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tambah</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+
+            <!--Judul-->
+            <h5 class="card-title">Selamat datang di BudayaKB Lite</h5>
+            <p class="card-text">Silahkan lihat-lihat dulu</p>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Sapien faucibus et molestie ac. Eu scelerisque felis
+                imperdiet proin fermentum leo. Vitae sapien pellentesque habitant morbi tristique senectus. Ornare
+                suspendisse sed nisi lacus sed. Varius sit amet mattis vulputate enim nulla. Facilisis sed odio morbi
+                quis commodo odio aenean sed adipiscing. Fermentum dui faucibus in ornare quam viverra orci. Lobortis
+                scelerisque fermentum dui faucibus in ornare quam viverra orci. Quis ipsum suspendisse ultrices gravida
+                dictum fusce ut placerat orci. Ut tristique et egestas quis ipsum suspendisse. Morbi blandit cursus
+                risus at ultrices mi tempus. Velit laoreet id donec ultrices tincidunt arcu non. Proin sed libero enim
+                sed faucibus turpis in. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Sit
+                amet nisl suscipit adipiscing bibendum est.</p>
+
+            <p class="card-text">Elementum curabitur vitae nunc sed. Mi eget mauris pharetra et ultrices neque ornare.
+                Ac ut consequat
+                semper viverra nam. Aliquam purus sit amet luctus venenatis lectus. Laoreet sit amet cursus sit amet.
+                Nibh tortor id aliquet lectus proin nibh nisl condimentum id. Ultricies mi eget mauris pharetra. Mi sit
+                amet mauris commodo. Facilisis gravida neque convallis a cras semper. Magnis dis parturient montes
+                nascetur ridiculus mus mauris. Dolor purus non enim praesent elementum facilisis leo vel. Venenatis a
+                condimentum vitae sapien pellentesque habitant morbi. Enim blandit volutpat maecenas volutpat blandit
+                aliquam etiam. Laoreet id donec ultrices tincidunt arcu non.</p>
+
+            <p class="card-text">Tristique magna sit amet purus gravida quis blandit. Nunc mi ipsum faucibus vitae
+                aliquet nec. Arcu
+                cursus euismod quis viverra nibh cras. Vehicula ipsum a arcu cursus vitae congue mauris. Integer
+                malesuada nunc vel risus. Interdum posuere lorem ipsum dolor sit amet consectetur. Aliquet lectus proin
+                nibh nisl. Nunc mattis enim ut tellus elementum sagittis vitae. Sollicitudin ac orci phasellus egestas
+                tellus. Varius morbi enim nunc faucibus a pellentesque. Bibendum arcu vitae elementum curabitur. Mauris
+                rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar.</p>
+        </div>
+    </div>
+</div>
 </body>
+
+<!--Footer-->
+<footer class="page-footer font-small special-color-dark pt-4">
+    <div class="kb-heading text-center py-3">
+        Made with &#128150; by Dennis A. Walangadi<br>1906400141
+    </div>
+</footer>
+
 </html>
