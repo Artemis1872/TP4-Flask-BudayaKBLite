@@ -61,16 +61,16 @@ def tambahData():
 		print(budayaData)
 		return render_template("tambahBudaya.html", result=datainput['Nama'], data=datainput)
 
-@app.route('/ubahBudaya', methods=['GET', 'POST'])
+@app.route('/ubah', methods=['GET', 'POST'])
 def ubahData():
 	if request.method == 'GET':
-		return render_template("ubahbudaya.html")
+		return render_template("ubah.html")
 
 	elif request.method == 'POST':
 		datainput = request.form
 		success = budayaData.ubah(datainput['Nama'], datainput['Tipe'], datainput['Provinsi'], datainput['Referensi'])
 		print(budayaData)
-		return render_template("ubahbudaya.html", result=success, data=datainput)
+		return render_template("ubah.html", result=success, data=datainput)
 
 
 @app.route('/hapusBudaya', methods=['GET', 'POST'])
@@ -84,10 +84,10 @@ def hapusData():
 		print(budayaData)
 		return render_template("hapusbudaya.html", result=deletion, budaya=datainput['Nama'])
 
-@app.route('/cariBudaya', methods=['GET', 'POST'])
+@app.route('/cari', methods=['GET', 'POST'])
 def cariData():
 	if request.method == 'GET':
-		return render_template("caribudaya.html")
+		return render_template("cari.html")
 
 	elif request.method == 'POST':
 		datainput = request.form
@@ -95,15 +95,15 @@ def cariData():
 		print(datainput['Nama'])
 		print(datainput['Tipe'])
 		print(datainput['Provinsi'])
-		if datainput['Nama'] != '':
-			data = budayaData.cariByNama(datainput['Nama'])
-		elif datainput['Tipe'] != '':
-			data = budayaData.cariByTipe(datainput['Tipe'])
-		elif datainput['Provinsi'] != '':
-			data = budayaData.cariByProv(datainput['Provinsi'])
-		else:
-			return render_template("caribudaya.html")
-		return render_template("caribudaya.html", result=data)
+		# if datainput['Nama'] != '':
+		# 	data = budayaData.cariByNama(datainput['Nama'])
+		# elif datainput['Tipe'] != '':
+		# 	data = budayaData.cariByTipe(datainput['Tipe'])
+		# elif datainput['Provinsi'] != '':
+		# 	data = budayaData.cariByProv(datainput['Provinsi'])
+		# else:
+		return render_template("cari.html")
+	return render_template("cari.html")
 
 @app.route('/statsBudaya', methods=['GET', 'POST'])
 def statData():

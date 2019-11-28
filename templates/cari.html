@@ -72,14 +72,6 @@
         margin-top: 1em;
     }
 
-    .colrow {
-        display: flex;
-    }
-
-    .column {
-        flex: 50%;
-    }
-
 </style>
 
 <head>
@@ -110,13 +102,13 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Dashboard</a>
+                    <a class="nav-link" href="/">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/impor">Impor/Ekspor</a>
+                    <a class="nav-link" href="#">Impor/Ekspor</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cari">Cari</a>
+                    <a class="nav-link active" href="/cari">Cari</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/ubah">Ubah data</a>
@@ -132,38 +124,81 @@
         <div class="card-body">
 
             <!--Judul-->
-            <h5 class="card-title">Selamat datang di BudayaKB Lite</h5>
-            <p class="card-text">Silahkan lihat-lihat dulu</p>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Sapien faucibus et molestie ac. Eu scelerisque felis
-                imperdiet proin fermentum leo. Vitae sapien pellentesque habitant morbi tristique senectus. Ornare
-                suspendisse sed nisi lacus sed. Varius sit amet mattis vulputate enim nulla. Facilisis sed odio morbi
-                quis commodo odio aenean sed adipiscing. Fermentum dui faucibus in ornare quam viverra orci. Lobortis
-                scelerisque fermentum dui faucibus in ornare quam viverra orci. Quis ipsum suspendisse ultrices gravida
-                dictum fusce ut placerat orci. Ut tristique et egestas quis ipsum suspendisse. Morbi blandit cursus
-                risus at ultrices mi tempus. Velit laoreet id donec ultrices tincidunt arcu non. Proin sed libero enim
-                sed faucibus turpis in. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Sit
-                amet nisl suscipit adipiscing bibendum est.</p>
+            <h5 class="card-title">Cari budaya</h5>
+            <p class="card-text">Anda dapat mencari buda-budaya di Indonesia berdasarkan kategori-kategori yang
+                tersedia.</p>
+            <br>
 
-            <p class="card-text">Elementum curabitur vitae nunc sed. Mi eget mauris pharetra et ultrices neque ornare.
-                Ac ut consequat
-                semper viverra nam. Aliquam purus sit amet luctus venenatis lectus. Laoreet sit amet cursus sit amet.
-                Nibh tortor id aliquet lectus proin nibh nisl condimentum id. Ultricies mi eget mauris pharetra. Mi sit
-                amet mauris commodo. Facilisis gravida neque convallis a cras semper. Magnis dis parturient montes
-                nascetur ridiculus mus mauris. Dolor purus non enim praesent elementum facilisis leo vel. Venenatis a
-                condimentum vitae sapien pellentesque habitant morbi. Enim blandit volutpat maecenas volutpat blandit
-                aliquam etiam. Laoreet id donec ultrices tincidunt arcu non.</p>
+{#            <div class="alert alert-danger" role="alert">#}
+{#                Data yang anda masukkan sudah ada di database, mohon hapus terlebih dahulu.#}
+{#            </div>#}
+{##}
+{#            <div class="alert alert-success" role="alert">#}
+{#                Budaya berhasil dihapus dari database.#}
+{#            </div>#}
 
-            <p class="card-text">Tristique magna sit amet purus gravida quis blandit. Nunc mi ipsum faucibus vitae
-                aliquet nec. Arcu
-                cursus euismod quis viverra nibh cras. Vehicula ipsum a arcu cursus vitae congue mauris. Integer
-                malesuada nunc vel risus. Interdum posuere lorem ipsum dolor sit amet consectetur. Aliquet lectus proin
-                nibh nisl. Nunc mattis enim ut tellus elementum sagittis vitae. Sollicitudin ac orci phasellus egestas
-                tellus. Varius morbi enim nunc faucibus a pellentesque. Bibendum arcu vitae elementum curabitur. Mauris
-                rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar.</p>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <select class="browser-default custom-select">
+                        <option selected>Pilih Kategori</option>
+                        <option value="Nama">Nama</option>
+                        <option value="Tipe">Tipe</option>
+                        <option value="Provinsi">Provinsi</option>
+                    </select>
+                </div>
+                <div class="custom-file">
+                    <input name="Nama" class="form-control" id="NamaBudaya" aria-describedby="namaHint"
+                           placeholder="Masukkan nama budaya">
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                </div>
+            </div>
+
+
+            <form>
+                <div class="form-group">
+                    <div class="form-group-prepend">
+
+                    </div>
+
+                </div>
+            </form>
         </div>
+
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nama Budaya</th>
+                <th scope="col">Tipe Budaya</th>
+                <th scope="col">Provinsi</th>
+                <th scope="col">Referensi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
+
+<!-- Optional JavaScript -->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 
 <!--Footer-->
