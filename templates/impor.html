@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html lang="id">
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:700|Roboto+Mono&display=swap');
+
+    @-webkit-keyframes dynamic-background {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @-moz-keyframes dynamic-background {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @keyframes dynamic-background {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    body {
+        background: linear-gradient(72deg, #3cbae4, #943ce4, #3c5ae4);
+        background-size: 500% 500%;
+        -webkit-animation: dynamic-background 20s ease infinite;
+        -moz-animation: dynamic-background 20s ease infinite;
+        animation: dynamic-background 20s ease infinite;
+    }
+
+    h1 {
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 4em !important;
+    }
+
+    sub {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 40% !important;
+    }
+
+    .kb-heading {
+        padding: 10px 10px;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    table {
+        margin-top: 1em;
+    }
+
+    .colrow {
+        display: flex;
+    }
+
+    .column {
+        flex: 50%;
+    }
+
+</style>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>BudayaKB Lite</title>
+</head>
+<body>
+<div class="container">
+
+    <!--Header-->
+    <div class="kb-heading">
+        <h1>BUDAYA-KB<sub>lite</sub></h1>
+        <p class="subtitle">Kalau bukan kita yang melestarikan budaya, siapa lagi?</p>
+    </div>
+    <!--Header-->
+
+    <!--Card Form-->
+    <div class="card">
+
+        <!--Navbar-->
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Impor/Ekspor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cari</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ubah data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Hapus data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tambah</a>
+                </li>
+            </ul>
+        </div>
+        <div class="colrow">
+            <div class="column">
+                <div class="card-body">
+
+                    <!--Judul-->
+                    <h5 class="card-title">Impor file</h5>
+                    <p class="card-text">Impor file CSV ke dalam databse BudayaKB Lite.</p>
+
+                    <!--Uploader-->
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Impor</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                   aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Pilih atau drop file berformat
+                                .csv</label>
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                        </div>
+                    </div>
+                    <br>
+
+                    <!--Alerts-->
+                    <div class="alert alert-danger" role="alert">
+                        Ada data duplikat
+                    </div>
+
+                    <div class="alert alert-success" role="alert">
+                        Berhasil upload
+                    </div>
+                    <button type="button" class="btn btn-primary">Primary</button>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card-body">
+                    <!--Judul-->
+                    <h5 class="card-title">Ekspor file</h5>
+                    <p class="card-text">Ekspor database BudayaKB Lite ke file CSV.</p>
+                    <div class="alert alert-success" role="alert">
+                        Berhasil ekspor!
+                    </div>
+                    <button type="button" class="btn btn-primary">Primary</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+<!--Footer-->
+<footer class="page-footer font-small special-color-dark pt-4">
+    <div class="kb-heading text-center py-3">
+        Made with &#128150; by Dennis A. Walangadi<br>1906400141
+    </div>
+</footer>
+
+</html>

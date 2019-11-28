@@ -1,0 +1,33 @@
+<html lang="id">
+<head>
+	<title>BudayaKB Lite</title>
+</head>
+
+<body>
+	 {% include 'includes/_navbar.html' %}
+	<h2>Hapus Budaya</h2>
+
+	<form method="POST" action="" enctype = "multipart/form-data">
+		<p>Masukkan nama budaya untuk menghapusnya</p>
+        <p>
+            <label>Nama Budaya:</label>
+            <input type="text" name="Nama"/>
+        </p>
+
+            <input type="submit" value="Hapus Budaya">
+    </form>
+
+
+	{% if result is defined and result == 1 %}
+	    <h3>{% print result %} berhasil dihapus</h3>
+
+    {% elif result is defined and result == 0 %}
+        <h3>{% print budaya %} tidak dapat ditemukan!</h3>
+    {% endif %}
+</body>
+</html>
+
+
+
+
+

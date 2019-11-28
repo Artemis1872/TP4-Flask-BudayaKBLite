@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>BudayaKB Lite</title>
+</head>
+
+<body>
+	 {% include 'includes/_navbar.html' %}
+	<h2>Statistik</h2>
+
+<div class="row">
+    <form method="POST" action="" enctype = "multipart/form-data">
+    <div class="column">
+            <p>Cari berdasarkan nama</p>
+            <p>
+                <label>Nama Budaya:</label>
+                <input type="text" name="Nama"/>
+            </p>
+                <input type="submit" value="Cari nama">
+    </div>
+    <div class="column">
+            <p>Cari berdasarkan tipe</p>
+            <p>
+                <label>Tipe Budaya:</label>
+                <input type="text" name="Tipe"/>
+            </p>
+                <input type="submit" value="Cari tipe">
+    </div>
+    </form>
+</div>
+
+	{% if result is defined and result>0 %}
+	    <h3>{% print result %} data budaya telah terimpor dari file "{%print fname%}"</h3>
+	{% endif %}
+</body>
+</html>
