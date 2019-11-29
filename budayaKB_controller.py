@@ -50,16 +50,16 @@ def importData():
 		return render_template("impor.html", result=result_impor, fname=f.filename)
 
 
-@app.route('/tambahBudaya', methods=['GET', 'POST'])
+@app.route('/tambah', methods=['GET', 'POST'])
 def tambahData():
 	if request.method == 'GET':
-		return render_template("tambahBudaya.html")
+		return render_template("tambah.html")
 
 	elif request.method == "POST":
 		datainput = request.form  # Mengambil data dan membuat kedalam dictionary
 		budayaData.tambah(datainput['Nama'], datainput['Tipe'], datainput['Provinsi'], datainput['Referensi'])
 		print(budayaData)
-		return render_template("tambahBudaya.html", result=datainput['Nama'], data=datainput)
+		return render_template("tambah.html", result=datainput['Nama'], data=datainput)
 
 @app.route('/ubah', methods=['GET', 'POST'])
 def ubahData():
@@ -73,16 +73,16 @@ def ubahData():
 		return render_template("ubah.html", result=success, data=datainput)
 
 
-@app.route('/hapusBudaya', methods=['GET', 'POST'])
+@app.route('/hapus', methods=['GET', 'POST'])
 def hapusData():
 	if request.method == 'GET':
-		return render_template("hapusbudaya.html")
+		return render_template("hapus.html")
 
 	elif request.method == 'POST':
 		datainput = request.form
 		deletion = budayaData.hapus(datainput['Nama'])
 		print(budayaData)
-		return render_template("hapusbudaya.html", result=deletion, budaya=datainput['Nama'])
+		return render_template("hapus.html", result=deletion, budaya=datainput['Nama'])
 
 @app.route('/cari', methods=['GET', 'POST'])
 def cariData():

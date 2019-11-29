@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html lang="id">
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:700|Roboto+Mono&display=swap');
+
+    @-webkit-keyframes dynamic-background {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @-moz-keyframes dynamic-background {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @keyframes dynamic-background {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    body {
+        background: linear-gradient(72deg, #3cbae4, #943ce4, #3c5ae4);
+        background-size: 500% 500%;
+        -webkit-animation: dynamic-background 20s ease infinite;
+        -moz-animation: dynamic-background 20s ease infinite;
+        animation: dynamic-background 20s ease infinite;
+    }
+
+    h1 {
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 4em !important;
+    }
+
+    sub {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 40% !important;
+    }
+
+    .kb-heading {
+        padding: 10px 10px;
+        text-align: center;
+        color: #ffffff;
+        text-shadow: 1px 3px 5px gray;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    table {
+        margin-top: 1em;
+    }
+
+</style>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>BudayaKB Lite</title>
+</head>
+<body>
+<div class="container">
+
+    <!--Header-->
+    <div class="kb-heading">
+        <h1>BUDAYA-KB<sub>lite</sub></h1>
+        <p class="subtitle">Kalau bukan kita yang melestarikan budaya, siapa lagi?</p>
+    </div>
+    <!--Header-->
+
+    <!--Card Form-->
+    <div class="card">
+
+        <!--Navbar-->
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/impor">Impor/Ekspor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cari">Cari</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ubah">Ubah data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/hapus">Hapus data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/tambah">Tambah</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+
+            <!--Judul-->
+            <h5 class="card-title">Tambah data</h5>
+            <p class="card-text">Anda dapat menambahkan data secara manual melalui laman ini.</p>
+            <br>
+
+            {#            <div class="alert alert-danger" role="alert">#}
+            {#                Data yang anda masukkan sudah ada di database, mohon hapus terlebih dahulu.#}
+            {#            </div>#}
+
+            {#            <div class="alert alert-success" role="alert">#}
+            {#                Budaya berhasil dihapus dari database.#}
+            {#            </div>#}
+
+            <form>
+                <div class="form-group">
+                    <label for="TipeBudaya">Pilih tipe budaya</label>
+                    <select class="browser-default custom-select" required>
+                        {#TODO: Jinja#}
+                        <option value="Nama">Nama</option>
+                        <option value="Tipe">Tipe</option>
+                        <option value="Provinsi">Provinsi</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="TipeBudaya">Tipe budaya</label>
+                    <input name="Tipe" class="form-control" id="TipeBudaya" aria-describedby="tipeHint"
+                           placeholder="Masukkan tipe budaya">
+                    <small id="tipeHint" class="form-text text-muted">Contoh: Makanan, Kerajinan, Tarian, dll...</small>
+                </div>
+                <div class="form-group">
+                    <label for="ProvBudaya">Asal provinsi</label>
+                    <input name="Tipe" class="form-control" id="ProvBudaya" aria-describedby="provHint"
+                           placeholder="Masukkan provinsi asal budaya">
+                    <small id="provHint" class="form-text text-muted">Contoh: Aceh, DKI Jakata, DI Yogyakarta,
+                        dll...</small>
+                </div>
+                <div class="form-group">
+                    <label for="RefBudaya">Referensi</label>
+                    <input name="Tipe" class="form-control" id="RefBudaya" aria-describedby="refHint"
+                           placeholder="Masukkan referensi budaya">
+                    <small id="refHint" class="form-text text-muted">Laman online yang menjelaskan budaya tersebut<br>Contoh:
+                        <a href="https://id.wikipedia.org/wiki/Rendang">https://id.wikipedia.org/wiki/Rendang</a></small>
+                </div>
+            </form>
+
+            <input class="btn btn-primary" type="submit" value="Submit">
+
+
+            <form>
+                <div class="form-group">
+                    <div class="form-group-prepend">
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nama Budaya</th>
+                <th scope="col">Tipe Budaya</th>
+                <th scope="col">Provinsi</th>
+                <th scope="col">Referensi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+<!--Footer-->
+<footer class="page-footer font-small special-color-dark pt-4">
+    <div class="kb-heading text-center py-3">
+        Made with &#128150; by Dennis A. Walangadi<br>1906400141
+    </div>
+</footer>
+
+</html>
