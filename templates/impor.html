@@ -144,13 +144,19 @@
                     <br>
 
                     <!--Alerts-->
-                    <div class="alert alert-danger" role="alert">
-                        Ada data duplikat
-                    </div>
 
+                    {% if impor is defined and impor == 0 %}
+                        <div class="alert alert-danger" role="alert">
+                            Ada data duplikat
+                        </div>
+                    {% endif %}
+
+                    {% if impor is defined and impor == 1 %}
                     <div class="alert alert-success" role="alert">
                         Berhasil upload
                     </div>
+                    {% endif %}
+
                     <button type="button" class="btn btn-primary">Primary</button>
                 </div>
             </div>
@@ -160,9 +166,13 @@
                     <!--Judul-->
                     <h5 class="card-title">Ekspor file</h5>
                     <p class="card-text">Ekspor database BudayaKB Lite ke file CSV.</p>
-                    <div class="alert alert-success" role="alert">
-                        Berhasil ekspor!
-                    </div>
+
+                    {% if export == 1 %}
+                        <div class="alert alert-success" role="alert">
+                            Berhasil ekspor!
+                        </div>
+                    {% endif %}
+
                     <button type="button" class="btn btn-primary">Primary</button>
                 </div>
             </div>
