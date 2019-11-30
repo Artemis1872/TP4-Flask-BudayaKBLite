@@ -11,8 +11,10 @@ Meganingrum Arista Jiwanggi (meganingrum@2cs.ui.ac.id)
 Last update: 23 November 2019
 
 """
+import os
+import requests
 from budayaKB_model import *
-from flask import Flask, request, render_template, redirect, flash
+from flask import Flask, request, render_template, redirect, flash, Response
 from wtforms import Form, validators, TextField
 
 app = Flask(__name__)
@@ -21,6 +23,8 @@ app.secret_key = "tp4"
 # inisialisasi objek budayaData
 # databasefilename = ""
 budayaData = BudayaCollection()
+UPLOAD_FOLDER = os.path.join(os.getcwd())
+ALLOWED_EXTENSIONS = {'csv', 'txt'}
 
 
 # merender tampilan default(index.html)
@@ -38,16 +42,34 @@ def importData():
 	if request.method == "GET":
 		return render_template("impor.html")
 
-	elif request.method == "POST":
-		f = request.files['file']
+	elif request.method == "POST" and 'imporcsv' in request.files:
 
-		print(f)
+		f = request.files['imporcsv']
+		savepath = os.path.join(UPLOAD_FOLDER, f.filename)
+
+		f.save(savepath)
 		databasefilename = f.filename
-		print(databasefilename)
-		result_impor = budayaData.importFromCSV(f.filename)
-		
-		# budayaData.exportToCSV(databasefilename)  # setiap perubahan data langsung disimpan ke file
-		return render_template("impor.html", result=result_impor, fname=f.filename)
+		count = budayaData.importFromCSV(savepath)
+		os.remove(savepath)
+		#budayaData.exportToCSV("exported.csv")  # setiap perubahan data langsung disimpan ke file
+		if count > 0:
+			return render_template("impor.html", count=count, filename=databasefilename, impor=1)
+		else:
+			return render_template("impor.html", impor=0)
+
+	elif request.method == "POST":
+		flag = budayaData.exportToCSV("exported.csv")
+
+		if flag == 1:
+			with open("exported.csv") as fp:
+				csv = fp.read()
+				return Response(
+					csv,
+					mimetype="text/csv",
+					headers={"Content-disposition": "attachment; filename=BudayaKB-Lite.csv"})
+		else:
+			render_template("impor.html", ekspor=flag)
+
 
 
 @app.route('/tambah', methods=['GET', 'POST'])
@@ -60,6 +82,7 @@ def tambahData():
 		budayaData.tambah(datainput['Nama'], datainput['Tipe'], datainput['Provinsi'], datainput['Referensi'])
 		print(budayaData)
 		return render_template("tambah.html", result=datainput['Nama'], data=datainput)
+
 
 @app.route('/ubah', methods=['GET', 'POST'])
 def ubahData():
@@ -84,6 +107,7 @@ def hapusData():
 		print(budayaData)
 		return render_template("hapus.html", result=deletion, budaya=datainput['Nama'])
 
+
 @app.route('/cari', methods=['GET', 'POST'])
 def cariData():
 	if request.method == 'GET':
@@ -104,6 +128,7 @@ def cariData():
 		# else:
 		return render_template("cari.html")
 	return render_template("cari.html")
+
 
 @app.route('/statsBudaya', methods=['GET', 'POST'])
 def statData():

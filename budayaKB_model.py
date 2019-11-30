@@ -97,6 +97,11 @@ class BudayaCollection(object):
         print(resultStr, file=fh)
         fh.close()
 
+        if resultStr == '':
+            return 0
+        else:
+            return 1
+
     def cariByNama(self, aName):
         """
         Return a list contains BudayaItem object of a certain name

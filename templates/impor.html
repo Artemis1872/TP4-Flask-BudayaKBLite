@@ -129,35 +129,36 @@
                     <p class="card-text">Impor file CSV ke dalam databse BudayaKB Lite.</p>
 
                     <!--Uploader-->
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01">Impor</span>
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="input-group">
+
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="uploader" name="imporcsv"
+                                       aria-describedby="uploadimpor" required>
+                                <label class="custom-file-label" for="uploader">Pilih atau drop file</label>
+                            </div>
+
                         </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                   aria-describedby="inputGroupFileAddon01">
-                            <label class="custom-file-label" for="inputGroupFile01">Pilih atau drop file berformat
-                                .csv</label>
-                            <input class="btn btn-primary" type="submit" value="Submit">
+                        <div class="mt-3">
+                            <input class="btn btn-primary" type="submit" value="Unggah">
                         </div>
-                    </div>
+                    </form>
                     <br>
 
                     <!--Alerts-->
 
                     {% if impor is defined and impor == 0 %}
                         <div class="alert alert-danger" role="alert">
-                            Ada data duplikat
+                            Terjadi kesalahan saat mengimpor, tidak ada ada yang diimpor
                         </div>
                     {% endif %}
 
                     {% if impor is defined and impor == 1 %}
-                    <div class="alert alert-success" role="alert">
-                        Berhasil upload
-                    </div>
+                        <div class="alert alert-success" role="alert">
+                            Terimpor {{ count }} baris dari {{ filename }}
+                        </div>
                     {% endif %}
 
-                    <button type="button" class="btn btn-primary">Primary</button>
                 </div>
             </div>
 
@@ -167,13 +168,14 @@
                     <h5 class="card-title">Ekspor file</h5>
                     <p class="card-text">Ekspor database BudayaKB Lite ke file CSV.</p>
 
-                    {% if export == 1 %}
-                        <div class="alert alert-success" role="alert">
-                            Berhasil ekspor!
+                    {% if ekspor == 0 %}
+                        <div class="alert alert-danger" role="alert">
+                            Terjadi kesalahan saat mengekspor data
                         </div>
                     {% endif %}
-
-                    <button type="button" class="btn btn-primary">Primary</button>
+                    <form method="POST">
+                        <input class="btn btn-primary" type="submit" value="Unduh">
+                    </form>
                 </div>
             </div>
         </div>
@@ -193,6 +195,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 </body>
 
 <!--Footer-->
