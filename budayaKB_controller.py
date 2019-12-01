@@ -68,7 +68,7 @@ def importData():
 					mimetype="text/csv",
 					headers={"Content-disposition": "attachment; filename=BudayaKB-Lite.csv"})
 		else:
-			render_template("impor.html", ekspor=flag)
+			return render_template("impor.html", ekspor=0)
 
 
 
@@ -114,11 +114,28 @@ def cariData():
 		return render_template("cari.html")
 
 	elif request.method == 'POST':
-		datainput = request.form
-		data = None
-		print(datainput['Nama'])
-		print(datainput['Tipe'])
-		print(datainput['Provinsi'])
+		tipe = request.form['Tipe']
+		teks = request.form['Teks']
+		print(tipe)
+		print(teks)
+
+		if tipe == 'Nama':
+			result = budayaData.cariByNama(teks)
+			return render_template("cari.html", result=result)
+		elif tipe == 'Tipe':
+			result = budayaData.cariByTipe(teks)
+			return render_template("cari.html", result=result)
+
+		elif tipe == 'Provinsi':
+			result = budayaData.cariByProv(teks)
+			return render_template("cari.html", result=result)
+		else:
+			return render_template("cari.html")
+		# datainput = request.form
+		# data = None
+		# print(datainput['Nama'])
+		# print(datainput['Tipe'])
+		# print(datainput['Provinsi'])
 		# if datainput['Nama'] != '':
 		# 	data = budayaData.cariByNama(datainput['Nama'])
 		# elif datainput['Tipe'] != '':
@@ -126,8 +143,7 @@ def cariData():
 		# elif datainput['Provinsi'] != '':
 		# 	data = budayaData.cariByProv(datainput['Provinsi'])
 		# else:
-		return render_template("cari.html")
-	return render_template("cari.html")
+	flash('Error')
 
 
 @app.route('/statsBudaya', methods=['GET', 'POST'])

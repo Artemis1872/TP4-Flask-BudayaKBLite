@@ -61,7 +61,6 @@
         padding: 10px 10px;
         text-align: center;
         color: #ffffff;
-        text-shadow: 1px 3px 5px gray;
     }
 
     .subtitle {
@@ -129,59 +128,64 @@
                 tersedia.</p>
             <br>
 
-{#            <div class="alert alert-danger" role="alert">#}
-{#                Data yang anda masukkan sudah ada di database, mohon hapus terlebih dahulu.#}
-{#            </div>#}
-{##}
-{#            <div class="alert alert-success" role="alert">#}
-{#                Budaya berhasil dihapus dari database.#}
-{#            </div>#}
+            {#            <div class="alert alert-danger" role="alert">#}
+            {#                Data yang anda masukkan sudah ada di database, mohon hapus terlebih dahulu.#}
+            {#            </div>#}
+            {##}
+            {#            <div class="alert alert-success" role="alert">#}
+            {#                Budaya berhasil dihapus dari database.#}
+            {#            </div>#}
 
 
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <select class="browser-default custom-select" required>
-                        <option value="Nama">Nama</option>
-                        <option value="Tipe">Tipe</option>
-                        <option value="Provinsi">Provinsi</option>
-                    </select>
-                </div>
-                <div class="custom-file">
-                    <input name="Nama" class="form-control" id="NamaBudaya" aria-describedby="namaHint"
-                           placeholder="Masukkan nama budaya">
-                    <input class="btn btn-primary" type="submit" value="Submit">
-                </div>
-            </div>
-
-
-            <form>
+            <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <div class="form-group-prepend">
-
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <select class="browser-default custom-select" name="Tipe" required>
+                                <option value="Nama">Nama</option>
+                                <option value="Tipe">Tipe</option>
+                                <option value="Provinsi">Provinsi</option>
+                            </select>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Cari budaya"
+                               aria-label="Cari Budaya" aria-describedby="basic-addon2" name="Teks" required>
+                        <div class="input-group-append">
+                            <input class="btn btn-primary" type="submit" value="Cari">
+                        </div>
                     </div>
-
                 </div>
             </form>
+
+            {% if result is defined and result == [] %}
+                <div class="alert alert-danger" role="alert">
+                    Tidak dapat menemukan data
+                </div>
+            {% endif %}
+
         </div>
 
-        <table class="table table-striped">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">Nama Budaya</th>
-                <th scope="col">Tipe Budaya</th>
-                <th scope="col">Provinsi</th>
-                <th scope="col">Referensi</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            </tbody>
-        </table>
+        {% if result is defined and result != [] %}
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nama Budaya</th>
+                    <th scope="col">Tipe Budaya</th>
+                    <th scope="col">Provinsi</th>
+                    <th scope="col">Referensi</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in result %}
+                    <tr>
+                        <th scope="row">{{ data.nama }}</th>
+                        <td>{{ data.tipe }}</td>
+                        <td>{{ data.prov }}</td>
+                        <td><a href={{ data.url }}>{{ data.url }}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 </div>
 
