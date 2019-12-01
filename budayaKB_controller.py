@@ -87,13 +87,12 @@ def tambahData():
 @app.route('/ubah', methods=['GET', 'POST'])
 def ubahData():
 	if request.method == 'GET':
-		return render_template("ubah.html")
+		return render_template("ubah.html", data=budayaData.koleksi)
 
 	elif request.method == 'POST':
 		datainput = request.form
 		success = budayaData.ubah(datainput['Nama'], datainput['Tipe'], datainput['Provinsi'], datainput['Referensi'])
-		print(budayaData)
-		return render_template("ubah.html", result=success, data=datainput)
+		return render_template("ubah.html", terubah=datainput['Nama'], result=success, data=budayaData.koleksi)
 
 
 @app.route('/hapus', methods=['GET', 'POST'])

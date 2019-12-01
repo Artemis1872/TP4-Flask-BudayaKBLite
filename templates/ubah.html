@@ -61,7 +61,6 @@
         padding: 10px 10px;
         text-align: center;
         color: #ffffff;
-        text-shadow: 1px 3px 5px gray;
     }
 
     .subtitle {
@@ -128,78 +127,74 @@
             <p class="card-text">Anda dapat mengubah data budaya-budaya di BudayaKB melalui laman ini.</p>
             <br>
 
-            {#            <div class="alert alert-danger" role="alert">#}
-            {#                Data yang anda masukkan sudah ada di database, mohon hapus terlebih dahulu.#}
-            {#            </div>#}
-
-            {#            <div class="alert alert-success" role="alert">#}
-            {#                Budaya berhasil dihapus dari database.#}
-            {#            </div>#}
-
-            <form>
-                <div class="form-group">
-                    <label for="TipeBudaya">Pilih tipe budaya</label>
-                    <select class="browser-default custom-select" required>
-                        {#TODO: Jinja#}
-                        <option value="Nama">Nama</option>
-                        <option value="Tipe">Tipe</option>
-                        <option value="Provinsi">Provinsi</option>
-                    </select>
+            {% if result is defined and success == 0 %}
+                <div class="alert alert-danger" role="alert">
+                    Terjadi kesalahan!
                 </div>
+            {% endif %}
 
-                <div class="form-group">
-                    <label for="TipeBudaya">Tipe budaya</label>
-                    <input name="Tipe" class="form-control" id="TipeBudaya" aria-describedby="tipeHint"
-                           placeholder="Masukkan tipe budaya">
-                    <small id="tipeHint" class="form-text text-muted">Contoh: Makanan, Kerajinan, Tarian, dll...</small>
+            {% if result is defined and success == 1 %}
+                <div class="alert alert-success" role="alert">
+                    {{ terubah }} berhasil diubah!
                 </div>
-                <div class="form-group">
-                    <label for="ProvBudaya">Asal provinsi</label>
-                    <input name="Tipe" class="form-control" id="ProvBudaya" aria-describedby="provHint"
-                           placeholder="Masukkan provinsi asal budaya">
-                    <small id="provHint" class="form-text text-muted">Contoh: Aceh, DKI Jakata, DI Yogyakarta,
-                        dll...</small>
-                </div>
-                <div class="form-group">
-                    <label for="RefBudaya">Referensi</label>
-                    <input name="Tipe" class="form-control" id="RefBudaya" aria-describedby="refHint"
-                           placeholder="Masukkan referensi budaya">
-                    <small id="refHint" class="form-text text-muted">Laman online yang menjelaskan budaya tersebut<br>Contoh:
-                        <a href="https://id.wikipedia.org/wiki/Rendang">https://id.wikipedia.org/wiki/Rendang</a></small>
-                </div>
-            </form>
+            {% endif %}
 
-            <input class="btn btn-primary" type="submit" value="Submit">
-
-
-            <form>
-                <div class="form-group">
-                    <div class="form-group-prepend">
-
+            {% if data != {} %}
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="NamaBudaya">Pilih nama budaya</label>
+                        <select name="Nama" class="browser-default custom-select" id="NamaBudaya" required>
+                            {% for keys in data %}
+                                <option value="{{ keys }}">{{ keys }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="TipeBudaya">Tipe budaya</label>
+                        <input name="Tipe" class="form-control" id="TipeBudaya" aria-describedby="tipeHint"
+                               placeholder="Masukkan tipe budaya">
+                    </div>
+                    <div class="form-group">
+                        <label for="ProvBudaya">Asal provinsi</label>
+                        <input name="Provinsi" class="form-control" id="ProvBudaya" aria-describedby="provHint"
+                               placeholder="Masukkan provinsi asal budaya">
+                    </div>
+                    <div class="form-group">
+                        <label for="RefBudaya">Referensi</label>
+                        <input name="Referensi" class="form-control" id="RefBudaya" aria-describedby="refHint"
+                               placeholder="Masukkan referensi budaya">
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                </form>
                 </div>
-            </form>
-        </div>
 
-        <table class="table table-striped">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">Nama Budaya</th>
-                <th scope="col">Tipe Budaya</th>
-                <th scope="col">Provinsi</th>
-                <th scope="col">Referensi</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            </tbody>
-        </table>
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nama Budaya</th>
+                        <th scope="col">Tipe Budaya</th>
+                        <th scope="col">Provinsi</th>
+                        <th scope="col">Referensi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for budaya in data %}
+                        <tr>
+                            <th scope="row">{{ data[budaya].nama }}</th>
+                            <td>{{ data[budaya].tipe }}</td>
+                            <td>{{ data[budaya].prov }}</td>
+                            <td><a href={{ data[budaya].url }}>{{ data[budaya].url }}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            {% elif data == {} %}
+                <div class="alert alert-danger" role="alert">
+                    Anda belum impor data apapun
+                </div>
+            {% endif %}
     </div>
 </div>
 
@@ -216,6 +211,25 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script>
+    ubahdata = document.getElementById('NamaBudaya');
+    ubahdata.addEventListener("change", function () {
+
+        {% for budaya in data %}
+            if (ubahdata.value === '{{ data[budaya].nama }}') {
+                document.getElementById('TipeBudaya').value = '{{ data[budaya].tipe }}';
+                document.getElementById('ProvBudaya').value = '{{ data[budaya].prov }}';
+                document.getElementById('RefBudaya').value = '{{ data[budaya].url }}';
+            }
+        {% endfor %}
+    });
+</script>
+{#<script>#}
+{#    $('#selection').change(function () {#}
+{#        alert($(this).val());#}
+{#    })#}
+{#</script>#}
+
 </body>
 
 <!--Footer-->
