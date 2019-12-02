@@ -12,7 +12,6 @@ Last update: 23 November 2019
 
 """
 import os
-import requests
 from budayaKB_model import *
 from flask import Flask, request, render_template, redirect, flash, Response
 from wtforms import Form, validators, TextField
@@ -98,13 +97,12 @@ def ubahData():
 @app.route('/hapus', methods=['GET', 'POST'])
 def hapusData():
 	if request.method == 'GET':
-		return render_template("hapus.html")
+		return render_template("hapus.html", data=budayaData.koleksi)
 
 	elif request.method == 'POST':
 		datainput = request.form
 		deletion = budayaData.hapus(datainput['Nama'])
-		print(budayaData)
-		return render_template("hapus.html", result=deletion, budaya=datainput['Nama'])
+		return render_template("hapus.html", result=deletion, terhapus=datainput['Nama'], data=budayaData.koleksi)
 
 
 @app.route('/cari', methods=['GET', 'POST'])
@@ -130,19 +128,6 @@ def cariData():
 			return render_template("cari.html", result=result)
 		else:
 			return render_template("cari.html")
-		# datainput = request.form
-		# data = None
-		# print(datainput['Nama'])
-		# print(datainput['Tipe'])
-		# print(datainput['Provinsi'])
-		# if datainput['Nama'] != '':
-		# 	data = budayaData.cariByNama(datainput['Nama'])
-		# elif datainput['Tipe'] != '':
-		# 	data = budayaData.cariByTipe(datainput['Tipe'])
-		# elif datainput['Provinsi'] != '':
-		# 	data = budayaData.cariByProv(datainput['Provinsi'])
-		# else:
-	flash('Error')
 
 
 @app.route('/statsBudaya', methods=['GET', 'POST'])
