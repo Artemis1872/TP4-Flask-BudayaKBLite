@@ -70,17 +70,15 @@ def importData():
 			return render_template("impor.html", ekspor=0)
 
 
-
 @app.route('/tambah', methods=['GET', 'POST'])
 def tambahData():
 	if request.method == 'GET':
-		return render_template("tambah.html")
+		return render_template("tambah.html", data=budayaData.koleksi)
 
 	elif request.method == "POST":
 		datainput = request.form  # Mengambil data dan membuat kedalam dictionary
-		budayaData.tambah(datainput['Nama'], datainput['Tipe'], datainput['Provinsi'], datainput['Referensi'])
-		print(budayaData)
-		return render_template("tambah.html", result=datainput['Nama'], data=datainput)
+		success = budayaData.tambah(datainput['Nama'], datainput['Tipe'], datainput['Provinsi'], datainput['Referensi'])
+		return render_template("tambah.html", result=datainput['Nama'], data=budayaData.koleksi, success=success)
 
 
 @app.route('/ubah', methods=['GET', 'POST'])
