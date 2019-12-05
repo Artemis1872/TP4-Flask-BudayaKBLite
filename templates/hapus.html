@@ -147,8 +147,8 @@
                     <div class="form-group">
                         <label for="NamaBudaya">Pilih nama budaya</label>
                         <select name="Nama" class="browser-default custom-select" id="NamaBudaya" required>
-                            {% for keys in data %}
-                                <option value="{{ keys }}">{{ keys }}</option>
+                            {% for key in keys %}
+                                <option value="{{ key }}">{{ key }}</option>
                             {% endfor %}
                         </select>
                     </div>

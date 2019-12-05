@@ -182,12 +182,12 @@
                             {% for budaya in result %}
                                 <tr>
                                     <th scope="row"><a
-                                            title="{{ result[budaya].nama }}">{{ result[budaya].nama|truncate(32) }}</a>
+                                            title="{{ budaya.nama }}">{{ budaya.nama|truncate(32) }}</a>
                                     </th>
-                                    <td><a title="{{ result[budaya].tipe }}">{{ result[budaya].tipe|truncate(32) }}</a></td>
-                                    <td><a title="{{ result[budaya].prov }}">{{ result[budaya].prov|truncate(32) }}</a></td>
-                                    <td><a href="{{ result[budaya].url }}"
-                                           title="{{ result[budaya].url }}">{{ result[budaya].url|truncate(32) }}</a></td>
+                                    <td><a title="{{ budaya.tipe }}">{{ budaya.tipe|truncate(32) }}</a></td>
+                                    <td><a title="{{ budaya.prov }}">{{ budaya.prov|truncate(32) }}</a></td>
+                                    <td><a href="{{ budaya.url }}"
+                                           title="{{ budaya.url }}">{{ budaya.url|truncate(32) }}</a></td>
                                 </tr>
                             {% endfor %}
                         {% elif kumpulbudaya is defined %}
