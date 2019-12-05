@@ -95,6 +95,24 @@
 </head>
 <body>
 <div class="container">
+    <script>
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function colorArray(n) {
+            var coloarr = [];
+            for (var j = 0; j < n; j++) {
+                coloarr.push(getRandomColor())
+            }
+            return coloarr;
+        }
+    </script>
 
     <!--Header-->
     <div class="kb-heading">
@@ -135,13 +153,137 @@
         <div class="card-body">
 
             <!--Judul-->
-            <h5 class="card-title">Statistik database</h5>
-            {% if databudaya !=0 %}
-                <canvas id="TipeBudaya"></canvas>
+            <h4 class="card-title">Statistik database</h4>
+            <p>Anda dapat melihat secara sekilas statistik data yang terdapat pada database.</p>
+
+            {% if databudaya != {} %}
+                <br>
+                <h3 style="text-align: center;">Terdapat {{ stat }} budaya di Database</h3>
+
+                <br>
+                <h3 style="text-align: center;">Statistik berdasarkan asal Provinsi:</h3>
+                <div class="row">
+                    <div class="col">
+                        {# Chart #}
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+                        <div>
+                            <canvas id="ProvBudaya">
+                            </canvas>
+                            <script>
+                                var ctx = document.getElementById('ProvBudaya').getContext('2d');
+                                var chart = new Chart(ctx, {
+                                    // The type of chart we want to create
+                                    type: 'doughnut',
+
+                                    // The data for our dataset
+                                    data: {
+                                        labels: {{ provlabel|tojson }},
+                                        datasets: [{
+                                            label: 'Budaya berdasarkan provinsi',
+                                            backgroundColor: colorArray({{ provnums }}),
+                                            data: {{ provdata }},
+                                            borderWidth: 0,
+                                        }]
+                                    },
+                                    options: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+
+                    {# Table #}
+                    <div class="col">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Provinsi</th>
+                                    <th scope="col">Jumlah budaya</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for name,value in provraw %}
+                                    <tr>
+                                        <th scope="row"><a
+                                                title="{{ name }}">{{ name|truncate(32) }}</a>
+                                        </th>
+                                        <td><a title="{{ value }}">{{ value }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <h3 style="text-align: center;">Statistik berdasarkan tipe budaya:</h3>
+                <div class="row">
+                    <div class="col">
+                        {# Chart #}
+                        <div>
+                            <canvas id="TipeBudaya">
+                            </canvas>
+                            <script>
+                                var ctx = document.getElementById('TipeBudaya').getContext('2d');
+                                var chart = new Chart(ctx, {
+                                    // The type of chart we want to create
+                                    type: 'doughnut',
+
+                                    // The data for our dataset
+                                    data: {
+                                        labels: {{ tipelabel|tojson }},
+                                        datasets: [{
+                                            label: 'Budaya berdasarkan tipe',
+                                            backgroundColor: colorArray({{ tipenums }}),
+                                            data: {{ tipedata }},
+                                            borderWidth: 0,
+                                        }]
+                                    },
+                                    options: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+
+                    {# Table #}
+                    <div class="col">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Tipe</th>
+                                    <th scope="col">Jumlah budaya</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for name,value in tiperaw %}
+                                    <tr>
+                                        <th scope="row"><a
+                                                title="{{ name }}">{{ name|truncate(32) }}</a>
+                                        </th>
+                                        <td><a title="{{ value }}">{{ value }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             {% else %}
                 <div class="alert alert-danger" role="alert">
                     Database masih kosong, mohon impor atau tambah data terlebih dahulu!
                 </div>
+
             {% endif %}
         </div>
     </div>
@@ -149,24 +291,6 @@
 </body>
 
 <!-- Optional JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js" >
-    var ctx = document.getElementById('TipeBudaya').getContext('2d');
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
-
-        // The data for our dataset
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45]
-            }]
-        }
-    });
-</script>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
