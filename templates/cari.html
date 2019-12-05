@@ -136,60 +136,78 @@
             {#                Budaya berhasil dihapus dari database.#}
             {#            </div>#}
 
-
-            <form method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <div class="input-group mb-3">
-                        <div class="input-group-append">
-                            <select class="browser-default custom-select" name="Tipe" required>
-                                <option value="Nama">Nama</option>
-                                <option value="Tipe">Tipe</option>
-                                <option value="Provinsi">Provinsi</option>
-                            </select>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Cari budaya"
-                               aria-label="Cari Budaya" aria-describedby="basic-addon2" name="Teks" required>
-                        <div class="input-group-append">
-                            <input class="btn btn-primary" type="submit" value="Cari">
+            {% if kumpulbudaya != {} %}
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <select class="browser-default custom-select" name="Tipe" required>
+                                    <option value="Nama">Nama</option>
+                                    <option value="Tipe">Tipe</option>
+                                    <option value="Provinsi">Provinsi</option>
+                                </select>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Cari budaya"
+                                   aria-label="Cari Budaya" aria-describedby="basic-addon2" name="Teks" required>
+                            <div class="input-group-append">
+                                <input class="btn btn-primary" type="submit" value="Cari">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
 
-            {% if result is defined and result == [] %}
+                {% if result is defined and result == [] %}
+                    <div class="alert alert-danger" role="alert">
+                        Tidak dapat menemukan data
+                    </div>
+                {% endif %}
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Nama Budaya</th>
+                            <th scope="col">Tipe Budaya</th>
+                            <th scope="col">Provinsi</th>
+                            <th scope="col">Referensi</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if result is defined and result != [] %}
+                            {% for budaya in result %}
+                                <tr>
+                                    <th scope="row"><a
+                                            title="{{ result[budaya].nama }}">{{ result[budaya].nama|truncate(32) }}</a>
+                                    </th>
+                                    <td><a title="{{ result[budaya].tipe }}">{{ result[budaya].tipe|truncate(32) }}</a></td>
+                                    <td><a title="{{ result[budaya].prov }}">{{ result[budaya].prov|truncate(32) }}</a></td>
+                                    <td><a href="{{ result[budaya].url }}"
+                                           title="{{ result[budaya].url }}">{{ result[budaya].url|truncate(32) }}</a></td>
+                                </tr>
+                            {% endfor %}
+                        {% elif kumpulbudaya is defined %}
+                            {% for budaya in kumpulbudaya %}
+                                <tr>
+                                    <th scope="row"><a
+                                            title="{{ kumpulbudaya[budaya].nama }}">{{ kumpulbudaya[budaya].nama|truncate(32) }}</a>
+                                    </th>
+                                    <td><a title="{{ kumpulbudaya[budaya].tipe }}">{{ kumpulbudaya[budaya].tipe|truncate(32) }}</a></td>
+                                    <td><a title="{{ kumpulbudaya[budaya].prov }}">{{ kumpulbudaya[budaya].prov|truncate(32) }}</a></td>
+                                    <td><a href="{{ kumpulbudaya[budaya].url }}"
+                                           title="{{ kumpulbudaya[budaya].url }}">{{ kumpulbudaya[budaya].url|truncate(32) }}</a></td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
                 <div class="alert alert-danger" role="alert">
-                    Tidak dapat menemukan data
+                    Database masih kosong, mohon impor data terlebih dahulu!
                 </div>
             {% endif %}
-
-        </div>
-
-        {% if result is defined and result != [] %}
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Nama Budaya</th>
-                        <th scope="col">Tipe Budaya</th>
-                        <th scope="col">Provinsi</th>
-                        <th scope="col">Referensi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for budaya in result %}
-                        <tr>
-                            <th scope="row"><a title="{{ data[budaya].nama }}">{{ data[budaya].nama|truncate(32) }}</a>
-                            </th>
-                            <td><a title="{{ data[budaya].tipe }}">{{ data[budaya].tipe|truncate(32) }}</a></td>
-                            <td><a title="{{ data[budaya].prov }}">{{ data[budaya].prov|truncate(32) }}</a></td>
-                            <td><a href="{{ data[budaya].url }}"
-                                   title="{{ data[budaya].url }}">{{ data[budaya].url|truncate(32) }}</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% endif %}
     </div>
 </div>
 

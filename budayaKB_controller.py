@@ -106,7 +106,7 @@ def hapusData():
 @app.route('/cari', methods=['GET', 'POST'])
 def cariData():
 	if request.method == 'GET':
-		return render_template("cari.html")
+		return render_template("cari.html", kumpulbudaya=budayaData.koleksi)
 
 	elif request.method == 'POST':
 		tipe = request.form['Tipe']
@@ -125,7 +125,7 @@ def cariData():
 			result = budayaData.cariByProv(teks)
 			return render_template("cari.html", result=result)
 		else:
-			return render_template("cari.html")
+			return render_template("cari.html", kumpulbudaya=budayaData.koleksi)
 
 
 @app.route('/statsBudaya', methods=['GET', 'POST'])
