@@ -139,34 +139,35 @@
                 </div>
             {% endif %}
 
-                <form method="POST">
-                    <div class="form-group">
-                        <label for="NamaBudaya">Nama budaya</label>
-                        <input name="Nama" class="form-control" id="NamaBudaya" aria-describedby="nameHint"
-                               placeholder="Masukkan nama budaya">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="TipeBudaya">Tipe budaya</label>
-                        <input name="Tipe" class="form-control" id="TipeBudaya" aria-describedby="tipeHint"
-                               placeholder="Masukkan tipe budaya">
-                    </div>
-                    <div class="form-group">
-                        <label for="ProvBudaya">Asal provinsi</label>
-                        <input name="Provinsi" class="form-control" id="ProvBudaya" aria-describedby="provHint"
-                               placeholder="Masukkan provinsi asal budaya">
-                    </div>
-                    <div class="form-group">
-                        <label for="RefBudaya">Referensi</label>
-                        <input name="Referensi" class="form-control" id="RefBudaya" aria-describedby="refHint"
-                               placeholder="Masukkan referensi budaya">
-                    </div>
-                    <input class="btn btn-primary" type="submit" value="Submit">
-                </form>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="NamaBudaya">Nama budaya</label>
+                    <input name="Nama" class="form-control" id="NamaBudaya" aria-describedby="nameHint"
+                           placeholder="Masukkan nama budaya">
                 </div>
 
-                {% if data != {} %}
-                <table class="table table-striped table-responsive">
+                <div class="form-group">
+                    <label for="TipeBudaya">Tipe budaya</label>
+                    <input name="Tipe" class="form-control" id="TipeBudaya" aria-describedby="tipeHint"
+                           placeholder="Masukkan tipe budaya">
+                </div>
+                <div class="form-group">
+                    <label for="ProvBudaya">Asal provinsi</label>
+                    <input name="Provinsi" class="form-control" id="ProvBudaya" aria-describedby="provHint"
+                           placeholder="Masukkan provinsi asal budaya">
+                </div>
+                <div class="form-group">
+                    <label for="RefBudaya">Referensi</label>
+                    <input name="Referensi" class="form-control" id="RefBudaya" aria-describedby="refHint"
+                           placeholder="Masukkan referensi budaya">
+                </div>
+                <input class="btn btn-primary" type="submit" value="Submit">
+            </form>
+        </div>
+
+        {% if data != {} %}
+            <div class="table-responsive">
+                <table class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">Nama Budaya</th>
@@ -178,15 +179,18 @@
                     <tbody>
                     {% for budaya in data %}
                         <tr>
-                            <th scope="row">{{ data[budaya].nama }}</th>
-                            <td>{{ data[budaya].tipe }}</td>
-                            <td>{{ data[budaya].prov }}</td>
-                            <td><a href={{ data[budaya].url }}>{{ data[budaya].url }}</a></td>
+                            <th scope="row"><a title="{{ data[budaya].nama }}">{{ data[budaya].nama|truncate(32) }}</a>
+                            </th>
+                            <td><a title="{{ data[budaya].tipe }}">{{ data[budaya].tipe|truncate(32) }}</a></td>
+                            <td><a title="{{ data[budaya].prov }}">{{ data[budaya].prov|truncate(32) }}</a></td>
+                            <td><a href="{{ data[budaya].url }}"
+                                   title="{{ data[budaya].url }}">{{ data[budaya].url|truncate(32) }}</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-            {% endif %}
+            </div>
+        {% endif %}
     </div>
 </div>
 

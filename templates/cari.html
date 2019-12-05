@@ -165,26 +165,30 @@
         </div>
 
         {% if result is defined and result != [] %}
-            <table class="table table-striped table-responsive">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Nama Budaya</th>
-                    <th scope="col">Tipe Budaya</th>
-                    <th scope="col">Provinsi</th>
-                    <th scope="col">Referensi</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for data in result %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
                     <tr>
-                        <th scope="row">{{ data.nama }}</th>
-                        <td>{{ data.tipe }}</td>
-                        <td>{{ data.prov }}</td>
-                        <td><a href={{ data.url }}>{{ data.url }}</a></td>
+                        <th scope="col">Nama Budaya</th>
+                        <th scope="col">Tipe Budaya</th>
+                        <th scope="col">Provinsi</th>
+                        <th scope="col">Referensi</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for budaya in result %}
+                        <tr>
+                            <th scope="row"><a title="{{ data[budaya].nama }}">{{ data[budaya].nama|truncate(32) }}</a>
+                            </th>
+                            <td><a title="{{ data[budaya].tipe }}">{{ data[budaya].tipe|truncate(32) }}</a></td>
+                            <td><a title="{{ data[budaya].prov }}">{{ data[budaya].prov|truncate(32) }}</a></td>
+                            <td><a href="{{ data[budaya].url }}"
+                                   title="{{ data[budaya].url }}">{{ data[budaya].url|truncate(32) }}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         {% endif %}
     </div>
 </div>
