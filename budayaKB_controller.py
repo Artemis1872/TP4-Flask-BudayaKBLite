@@ -128,14 +128,14 @@ def cariData():
 			return render_template("cari.html", kumpulbudaya=budayaData.koleksi)
 
 
-@app.route('/statsBudaya', methods=['GET', 'POST'])
+@app.route('/statistik', methods=['GET', 'POST'])
 def statData():
 	if request.method == 'GET':
 		banyak = budayaData.stat()
-		return render_template("statistik.html", count=banyak)
+		return render_template("stat.html")
 
 	elif request.method == 'POST':
-		return render_template("statistik.html")
+		return render_template("stat.html")
 
 
 # run main app
