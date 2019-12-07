@@ -30,6 +30,8 @@ budayaData = BudayaCollection()
 UPLOAD_FOLDER = os.path.join(os.getcwd())
 ALLOWED_EXTENSIONS = {'csv', 'txt'}
 
+def file_check(file):
+    return '.' in file and file.rsplit('.', 1)[-1] in ALLOWED_EXTENSIONS
 
 # merender tampilan default(index.html)
 @app.route('/')
@@ -50,13 +52,16 @@ def import_ekspor():
     elif request.method == "POST" and 'imporcsv' in request.files:
 
         f = request.files['imporcsv']
-        savepath = os.path.join(UPLOAD_FOLDER, f.filename)  # Cari path file yang ingin kita ambil
-        f.save(savepath)  # Simpan file yang dituju ke dalam root folder
-        databasefilename = f.filename  # Ambil nama file
-        count = budayaData.importFromCSV(savepath)  # Impor dan hitung berapa line yang kita input
-        os.remove(savepath)  # Hapus file sementara yang telah kita upload
-        if count > 0:
-            return render_template("impor.html", count=count, filename=databasefilename, impor=1)
+        if file_check(f.filename):
+            savepath = os.path.join(UPLOAD_FOLDER, f.filename)  # Cari path file yang ingin kita ambil
+            f.save(savepath)  # Simpan file yang dituju ke dalam root folder
+            databasefilename = f.filename  # Ambil nama file
+            count = budayaData.importFromCSV(savepath)  # Impor dan hitung berapa line yang kita input
+            os.remove(savepath)  # Hapus file sementara yang telah kita upload
+            if count > 0:
+                return render_template("impor.html", count=count, filename=databasefilename, impor=1)
+            else:
+                return render_template("impor.html", impor=0)
         else:
             return render_template("impor.html", impor=0)
 
@@ -198,4 +203,4 @@ def stat_data():
 # run main app
 if __name__ == "__main__":
     app.run()
-# app.run(debug=True)
+    # app.run(debug=True)
