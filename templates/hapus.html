@@ -143,17 +143,30 @@
             {% endif %}
 
             {% if data != {} %}
-                <form method="POST">
-                    <div class="form-group">
-                        <label for="NamaBudaya">Pilih nama budaya</label>
-                        <select name="Nama" class="browser-default custom-select" id="NamaBudaya" required>
-                            {% for key in keys %}
-                                <option value="{{ key }}">{{ key }}</option>
-                            {% endfor %}
-                        </select>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST">
+                            <div class="form-group">
+                                <label for="NamaBudaya">Pilih nama budaya</label>
+                                <select name="Nama" class="browser-default custom-select" id="NamaBudaya" required>
+                                    {% for key in keys %}
+                                        <option value="{{ key }}">{{ key }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Hapus">
+                        </form>
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Hapus">
-                </form>
+
+                    <div class="col">
+                        <form method="POST" class="mt-2">
+                            <div class="form-group">
+                                <label>Hapus seluruh data di dalam database:</label>
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Hapus Database">
+                        </form>
+                    </div>
+                </div>
                 </div>
 
                 <div class="table-responsive">
