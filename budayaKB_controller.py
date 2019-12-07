@@ -25,6 +25,8 @@ app.secret_key = "tp4"
 
 # inisialisasi objek budayaData
 budayaData = BudayaCollection()
+
+# variabel flask yang akan digunakan
 UPLOAD_FOLDER = os.path.join(os.getcwd())
 ALLOWED_EXTENSIONS = {'csv', 'txt'}
 
@@ -35,12 +37,13 @@ def index():
     return render_template("index.html")
 
 
-# Bagian ini adalah implementasi fitur Impor Budaya, yaitu:
-# - merender tampilan saat menu Impor Budaya diklik	
-# - melakukan pemrosesan terhadap isian form setelah tombol "Import Data" diklik
-# - menampilkan notifikasi bahwa data telah berhasil diimport 	
+# Bagian ini adalah implementasi fitur Impor dan Ekspor Budaya, yaitu:
+# - merender tampilan saat menu Impor/Ekspor diklik
+# - melakukan pemrosesan terhadap isian form setelah tombol "Unggah" atau "Unduh" diklik
+# - menampilkan notifikasi bahwa data telah berhasil diimport
+# - memberikan file berupa data di dalam database kepada user
 @app.route('/impor', methods=['GET', 'POST'])
-def import_data():
+def import_ekspor():
     if request.method == "GET":
         return render_template("impor.html")
 
@@ -72,6 +75,10 @@ def import_data():
             return render_template("impor.html", ekspor=0)
 
 
+# Bagian ini adalah implementasi fitur Tambah Budaya, yaitu:
+# - merender tampilan saat menu Tambah diklik
+# - melakukan pemrosesan terhadap isian form setelah tombol "Tambah" diklik
+# - menampilkan notifikasi bahwa data telah berhasil ditambahkan
 @app.route('/tambah', methods=['GET', 'POST'])
 def tambah_data():
     if request.method == 'GET':
@@ -85,6 +92,10 @@ def tambah_data():
         return render_template("tambah.html", result=datainput['Nama'], data=budayaData.koleksi, success=success)
 
 
+# Bagian ini adalah implementasi fitur Ubah Budaya, yaitu:
+# - merender tampilan saat menu Ubah diklik
+# - melakukan pemrosesan terhadap isian form setelah tombol "Update" diklik
+# - menampilkan notifikasi bahwa data telah berhasil diubah
 @app.route('/ubah', methods=['GET', 'POST'])
 def ubah_data():
     if request.method == 'GET':
@@ -100,6 +111,10 @@ def ubah_data():
         return render_template("ubah.html", terubah=datainput['Nama'], result=success, data=budayaData.koleksi)
 
 
+# Bagian ini adalah implementasi fitur Hapus Budaya, yaitu:
+# - merender tampilan saat menu Hapus diklik
+# - melakukan pemrosesan terhadap isian form setelah tombol "Hapus" atau "Haus database" diklik
+# - menampilkan notifikasi bahwa data telah berhasil dihapus
 @app.route('/hapus', methods=['GET', 'POST'])
 def hapus_data():
     if request.method == 'GET':
@@ -120,6 +135,10 @@ def hapus_data():
         return render_template("hapus.html", result=1, terhapus="Seluruh data", data=budayaData.koleksi)
 
 
+# Bagian ini adalah implementasi fitur Cari Budaya, yaitu:
+# - merender tampilan saat menu Cari diklik
+# - melakukan pemrosesan terhadap isian form setelah tombol "Cari" diklik
+# - menampilkan data secara real-time
 @app.route('/cari', methods=['GET', 'POST'])
 def cari_data():
     if request.method == 'GET':
@@ -146,6 +165,10 @@ def cari_data():
             return render_template("cari.html", kumpulbudaya=budayaData.koleksi)
 
 
+# Bagian ini adalah implementasi fitur Statistik Budaya, yaitu:
+# - merender tampilan saat menu Impor Budaya diklik
+# - melakukan visualisasi data menggunakan Chart.js
+# - menampilkan tabel data berdasarkan tipe dan provinsi budaya
 @app.route('/statistik', methods=['GET', 'POST'])
 def stat_data():
     # PERSIAPAN DATA

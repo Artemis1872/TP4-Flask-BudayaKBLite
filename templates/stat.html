@@ -85,25 +85,28 @@
     <title>BudayaKB Lite</title>
 </head>
 <body>
-<div class="container">
-    <script>
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF'.split('');
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
 
-        function colorArray(n) {
-            var coloarr = [];
-            for (var j = 0; j < n; j++) {
-                coloarr.push(getRandomColor())
-            }
-            return coloarr;
+{# Fungsi untuk generate hex warna, dan list dari hex warna #}
+<script>
+    function getHex() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
         }
-    </script>
+        return color;
+    }
+
+    function colorArray(n) {
+        var coloarr = [];
+        for (var j = 0; j < n; j++) {
+            coloarr.push(getHex())
+        }
+        return coloarr;
+    }
+</script>
+
+<div class="container">
 
     <!--Header-->
     <div class="kb-heading">
@@ -160,13 +163,11 @@
                         <div>
                             <canvas id="ProvBudaya">
                             </canvas>
+                            {# Visualisasi data menggunakan Chart.js #}
                             <script>
                                 var ctx = document.getElementById('ProvBudaya').getContext('2d');
                                 var chart = new Chart(ctx, {
-                                    // The type of chart we want to create
                                     type: 'doughnut',
-
-                                    // The data for our dataset
                                     data: {
                                         labels: {{ provlabel|tojson }},
                                         datasets: [{
@@ -219,13 +220,11 @@
                         <div>
                             <canvas id="TipeBudaya">
                             </canvas>
+                            {# Visualisasi data menggunakan Chart.js #}
                             <script>
                                 var ctx = document.getElementById('TipeBudaya').getContext('2d');
                                 var chart = new Chart(ctx, {
-                                    // The type of chart we want to create
                                     type: 'doughnut',
-
-                                    // The data for our dataset
                                     data: {
                                         labels: {{ tipelabel|tojson }},
                                         datasets: [{
